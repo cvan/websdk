@@ -1,0 +1,81 @@
+{
+  "name": "websdk",
+  "libraryName": "websdk",
+  "productName": "WebSDK",
+  "version": "0.1.0",
+  "description": "The Universal SDK for Web Applications",
+  "main": "dist/websdk.js",
+  "license": "CC0-1.0",
+  "author": "Christopher Van Wiemeersch <hearcomestreble@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/cvan/websdk/issues"
+  },
+  "homepage": "https://github.com/cvan/websdk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cvan/web-sdk.git"
+  },
+  "keywords": [
+    "websdk",
+    "web-sdk",
+    "websdk",
+    "sdk-web",
+    "sdkweb",
+    "sdk",
+    "navigator-web-sdk",
+    "navigatorwebsdk",
+    "navigator-websdk",
+    "navigatorweb",
+    "navigator-web",
+    "navigator",
+    "web",
+    "browser",
+    "webpack",
+    "browserify",
+    "es6",
+    "es5",
+    "library",
+    "universal",
+    "umd",
+    "amd",
+    "commonjs",
+    "babel"
+  ],
+  "semistandard": {
+    "ignore": [
+      "dist",
+      "**/vendor/**"
+    ]
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.24.0",
+    "babel-eslint": "^7.2.1",
+    "babel-loader": "^6.4.1",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-es2015": "^6.24.0",
+    "chai": "^3.5.0",
+    "eslint": "^3.19.0",
+    "eslint-loader": "^1.7.1",
+    "mocha": "^3.2.0",
+    "semistandard": "^10.0.0",
+    "snazzy": "^6.0.0",
+    "webpack": "^2.3.3",
+    "webpack-dev-server": "^2.4.2",
+    "yargs": "^7.0.2"
+  },
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "webpack-dev-server --no-inline --progress --colors --watch --env dev",
+    "pretest": "npm run build",
+    "test": "mocha --compilers js:babel-core/register --colors ./test/*.spec.js",
+    "pretest:watch": "npm run dist-max",
+    "test:watch": "mocha --compilers js:babel-core/register --colors --watch ./test/*.spec.js",
+    "build": "webpack --env dist-max",
+    "lint": "semistandard -v | snazzy || true",
+    "lint:fix": "semistandard -v --fix | snazzy || true",
+    "dist": "npm run dist:max && npm run dist:min",
+    "dist:max": "webpack --env dist-max",
+    "dist:min": "webpack --env dist-min"
+  }
+}

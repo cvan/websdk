@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example • WebSDK</title>
+  </head>
+  <body>
+    <script>
+      (function () {
+        /* global WebSDK */
+
+        var init = function () {
+          if (!('WebSDK' in window)) {
+            return;
+          }
+
+          var app1 = new WebSDK({
+            slug: 'webvr_rocks',
+            name: 'WebVR Rocks',
+            documentURL: 'https://webvr.rocks/',
+            manifestURL: 'https://webvr.rocks/manifest.webmanifest'
+          });
+
+          window.app1 = app1;
+
+          console.log('[%s] App name:', app1.slug, app1.name);
+          console.log('[%s] App manifest:', app1.slug, app1.manifest);
+          console.log('\n');
+
+          var app2 = new WebSDK({
+            slug: 'pwa_rocks',
+            name: 'PWA Rocks',
+            documentURL: 'https://www.pwa.rocks/',
+            manifestURL: 'https://pwa.rocks/pwa.webmanifest'
+          });
+
+          window.app2 = app2;
+
+          console.log('[%s] App name:', app2.slug, app2.name);
+          console.log('[%s] App manifest:', app2.slug, app2.manifest);
+          console.log('\n');
+
+          window.addEventListener('websdk.manifestchange', function (evt) {
+            console.log('[%s] App manifest changed', evt.app.slug, evt.manifest);
+          });
+
+          window.addEventListener('websdk.namechange', function (evt) {
+            console.log('[%s] App name changed:', evt.app.slug, evt.name);
+          });
+        };
+
+        if ('WebSDK' in window) {
+          init();
+        } else {
+          // Gracefully load if the development server is not running.
+          var script = document.createElement('script');
+          script.addEventListener('load', init);
+          script.addEventListener('error', function (err) {
+            if (script.src === '../dist/websdk.js') {
+              console.error(err);
+              return;
+            }
+            script.src = '../dist/websdk.js';
+          });
+          script.src = '/websdk.js';
+          document.head.appendChild(script);
+        }
+      })();
+      </script>
+  </body>
+</html>
